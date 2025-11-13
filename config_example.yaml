@@ -1,0 +1,53 @@
+data:
+  timeframe: daily
+
+ma:
+  type: SMA
+  lengths: [10,20,30,50,100,150,200]
+  lookback_window_bars: 252
+  support_tolerance_pct: 0.005
+  entry_tolerance_pct: 0.005
+  min_gap_between_touches_bars: 5
+  min_touches_for_valid_ma: 5
+  forward_return_horizons: [1,5,20]
+  score_weights:
+    win_rate: 0.4
+    median_return: 0.4
+    max_drawdown: 0.2
+
+trend_filter:
+  enabled: true
+  trend_ma_length: 100
+  trend_lookback_bars: 20
+
+entries:
+  allow_multiple_positions: false
+
+exits:
+  exit_mode: combo
+  stop_loss_pct: 0.07
+  stop_below_ma_pct: 0.02
+  take_profit_R_multiple: 2.0
+  max_holding_bars: 60
+  exit_tolerance_pct: 0.005
+
+risk:
+  risk_per_trade_pct_of_equity: 0.01
+
+costs:
+  commission_bps: 1.0
+  slippage_bps: 2.0
+
+walk_forward:
+  enabled: true
+  train_period_bars: 756
+  test_period_bars: 252
+  step_bars: 252
+  continuous_equity: true
+  optimization_objective: sharpe
+  param_grid:
+    support_tolerance_pct: [0.003,0.005]
+    entry_tolerance_pct: [0.003,0.005]
+    trend_ma_length: [50,100]
+
+
